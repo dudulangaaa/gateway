@@ -15,7 +15,7 @@ from zipline.api import (order, symbol)
 import numpy as np
 import re
 
-from cn_stock_holidays.zipline.exchange_calendar_shsz import SHSZExchangeCalendar
+from cn_calendar.gateway.exchange_calendar_shsz import SHSZExchangeCalendar
 
 import sys
 import logbook
@@ -459,8 +459,11 @@ if __name__ == '__main__' :
     log.info(df.index)
     data['601336'] = df
     panel = pd.Panel(data)
+
+    cn_cal = SHSZExchangeCalendar()
+    panel.major_axis = panel.major_axis.tz_localize(cn_cal.tz)
     algo_obj = TradingAlgorithm(initialize=initialize, handle_data=handle_data,
-                                trading_calendar = SHSZExchangeCalendar(),
+                                trading_calendar = cn_cal,
                                 data_frequency = 'minute',
                                 clock_file = "data/clock.csv")
 
