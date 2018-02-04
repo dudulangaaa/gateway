@@ -26,7 +26,7 @@ class WatchList :
 
     def __str__(self) :
         s = []
-        s.append("watchlist, name %s :"%(self.name))
+        s.append("watchlist, type %s, name %s :"%(type(self), self.name))
         for sn in sorted(self.data.keys()) :
             s.append("sn %d, %s"%(sn, sorted(self.data[sn])))
         return '\n'.join(s)
@@ -73,9 +73,7 @@ class WatchListConst(WatchList) :
 
     def __str__(self) :
         s = []
-        l = list(self.data)
-        l.sort()
-        s.append("watchlist, name %s : %s"%(self.name, l))
+        s.append("watchlist, type %s, name %s : %s"%(type(self), self.name, sorted(self.data)))
         return '\n'.join(s)
 
     def add(self, *args) :
@@ -118,7 +116,7 @@ class WatchLists :
 
     def __str__(self) :
         s = []
-        s.append("watchlists : ")
+        s.append("watchlists, type %s : "%(type(self)))
         s.append("tickers         : %s"%self.tickers)
         s.append("watchlist_names : %s"%self.watchlist_names   )
         s.append("base_sn : %s"%self.base_sn)
@@ -235,8 +233,9 @@ if __name__ == "__main__" :
     watchlists.reset_all()
     log.info(watchlists)
 
-    watchlists.add_to_watchlist('1', 'x')
-    watchlists.set_watchlist('1', 'x')
+    if False :
+        watchlists.add_to_watchlist('1', 'x')
+        watchlists.set_watchlist('1', 'x')
 
     log.info("done")
 

@@ -84,3 +84,8 @@ if os.name == 'nt':
 ###     'run_algorithm',
 ###     'utils',
 ### ]
+
+'''
+extra added
+'''
+from . watchlists import WatchLists
