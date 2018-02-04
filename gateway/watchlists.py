@@ -179,6 +179,8 @@ class WatchLists :
 
     pass
 
+
+
 if __name__ == "__main__" :
     handler = logbook.StreamHandler(sys.stdout, level=logbook.DEBUG)
     handler.formatter.format_string = '{record.time}|{record.level_name}|{record.module}|{record.func_name}|{record.lineno}|{record.message}'
