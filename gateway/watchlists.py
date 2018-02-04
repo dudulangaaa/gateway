@@ -109,7 +109,7 @@ class WatchLists :
             else :
                 self.watchlists[n] = WatchList(n)
 
-        self.tickers = tickers
+        self.tickers = set(tickers)
         self.base_sn = base_sn
         self.trading_window =trading_window
         self.watchlist_relation = watchList_relation
@@ -136,13 +136,20 @@ class WatchLists :
     def watchlist(self, name):
         return self._get_watchlist(name)
 
+    def _validate_tickers(self, tickers) :
+        s = set(tickers)
+        s = s - self.tickers
+        assert s == set(), "passed in tickers %s not in watchlists tickers %s"%(sorted(s), sorted(self.tickers))
+
     def add_to_watchlist(self, name, tickers) :
         watchlist = self._get_watchlist(name)
+        self._validate_tickers(tickers)
         watchlist.add(self.sn, tickers)
         pass
 
     def set_watchlist(self, name, tickers) :
         watchlist = self._get_watchlist(name)
+        self._validate_tickers(tickers)
         watchlist.set(self.sn, tickers)
         pass
 
@@ -227,6 +234,9 @@ if __name__ == "__main__" :
     log.info("reset all");
     watchlists.reset_all()
     log.info(watchlists)
+
+    watchlists.add_to_watchlist('1', 'x')
+    watchlists.set_watchlist('1', 'x')
 
     log.info("done")
 
