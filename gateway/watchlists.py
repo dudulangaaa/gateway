@@ -197,7 +197,7 @@ if __name__ == "__main__" :
 
     log.info("reset '1'")
     watchlists.reset_watchlist('1')
-    log.info(watchlists.watchlist('1'))
+    log.info("reset '1' : %s"%watchlists.watchlist('1'))
 
     log.info("add tickers to to list '2'")
     watchlists.set_sn(1)
@@ -245,11 +245,15 @@ watchlist
 
 """
 define the API for watchlists
-watchlists.get(name)
-watchlists.get(name, pos)  # pos <= 0
-watchlists.get_until(name, pos)  # pos <= 0
-watchlists.put(name, tickers)
-watchlists.move(from_name, tickers, to_name)
+watchlists.set_sn   (sn)                # set watchlist current sn
+watchlists.get      (name, pos = 0)     # pos <= 0
+watchlists.get_until(name, pos = 0)     # pos <= 0
+watchlists.put      (name, tickers)     # add tickers to list in current sn
+watchlists.set      (name, tickers)     # set tickers as list in current sn
+watchlists.del      (name, tickers, pos = 0)
+watchlists.del_until(name, tickers, pos = 0)
+watchlists.move     (from_name, tickers, to_name)   # move tickers from list from to list to
+watchlists.reset    (name, tickers = None)          # reset list name
 """
 
 
