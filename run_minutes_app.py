@@ -216,7 +216,7 @@ def handle_data(context, data):
 
     log.info("-------- SN %d -----------, date : %s"%(sn, data.current_dt))
     if True :
-        if sn == 99 or (sn > 120 and sn<130) :       # for debug/testing only
+        if sn == 99 or (sn > 120 and sn<130)== 124 or sn == 125 :       # for debug/testing only
             # context.batch.dump();
             print("history 5 : \n%s"%data.history(context.symbols, 'close', 5, '1m'))
 

@@ -37,7 +37,7 @@ def initialize(context):
     context.sn = 0
     pass
 
-def handle_data(context, data):
+def handle_data(context, bar_data):
     sn = context.sn
     sn = sn + 1
     context.sn = sn
@@ -45,11 +45,11 @@ def handle_data(context, data):
     if sn < 25  or sn > 1000:
         return
 
-    log.info("-------- SN %d -----------, date : %s"%(sn, data.current_dt))
+    log.info("-------- SN %d -----------, date : %s"%(sn, bar_data.current_dt))
     if True :
         if sn == 99 or (sn > 120 and sn<130) :       # for debug/testing only
             # context.batch.dump();
-            print("history 5 : \n%s"%data.history(context.symbols, 'close', 5, '1m'))
+            print("history 5 : \n%s"%bar_data.history(context.symbols, 'close', 5, '1m'))
 
 if __name__ == '__main__' :
     log.info("app01, main, entering")

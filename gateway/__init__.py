@@ -89,3 +89,4 @@ if os.name == 'nt':
 extra added
 '''
 from . watchlists import WatchLists
+from . data import Data
